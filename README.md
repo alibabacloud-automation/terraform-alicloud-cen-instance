@@ -63,3 +63,83 @@ You can use this in your terraform template with the following steps.
 | this_child_instance_id | The ID of CEN child instance |
 | this_route_table_id | The route table of the attached VBR or VPC.               |
 | this_cidr_block     | The destination CIDR block of the route entry to publish. |
+
+## Notes
+From the version v1.2.0, the module has removed the following `provider` setting:
+
+```hcl
+provider "alicloud" {
+   version              = ">=1.80.0"
+   region               = var.region != "" ? var.region : null
+   configuration_source = "terraform-alicloud-modules/cen-instance"
+}
+```
+
+If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 1.1.0:
+
+```hcl
+module "cen_instance" {
+   source      = "terraform-alicloud-modules/cen-instance/alicloud"
+   version     = "1.1.0"
+   region      = "cn-beijing"
+   name        = "cen-instance-name"
+   description = "cen-example"
+   // ...
+}
+```
+
+If you want to upgrade the module to 1.2.0 or higher in-place, you can define a provider which same region with
+previous region:
+
+```hcl
+provider "alicloud" {
+   region = "cn-beijing"
+}
+module "cen_instance" {
+   source      = "terraform-alicloud-modules/cen-instance/alicloud"
+   name        = "cen-instance-name"
+   description = "cen-example"
+   // ...
+}
+```
+or specify an alias provider with a defined region to the module using `providers`:
+
+```hcl
+provider "alicloud" {
+   region = "cn-beijing"
+   alias  = "bj"
+}
+module "cen_instance" {
+   source      = "terraform-alicloud-modules/cen-instance/alicloud"
+   providers   = {
+      alicloud = alicloud.bj
+   }
+   name        = "cen-instance-name"
+   description = "cen-example"
+   // ...
+}
+```
+
+and then run `terraform init` and `terraform apply` to make the defined provider effect to the existing module state.
+
+More details see [How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
+
+## Terraform versions
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.80.0 |
+
+Authors
+-------
+Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com)
+
+License
+----
+Apache 2 Licensed. See LICENSE for full details.
+Reference
+---------
+* [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
+* [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)
+* [Terraform-Provider-Alicloud Docs](https://www.terraform.io/docs/providers/alicloud/index.html)
