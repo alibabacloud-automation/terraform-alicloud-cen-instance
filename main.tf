@@ -6,12 +6,6 @@ terraform {
   required_version = ">= 0.12"
 }
 
-provider "alicloud" {
-  version              = ">=1.80.0"
-  region               = var.region != "" ? var.region : null
-  configuration_source = "terraform-alicloud-modules/cen-instance"
-}
-
 ###############
 # CEN instance
 ###############
