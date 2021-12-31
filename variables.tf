@@ -1,15 +1,19 @@
 variable "region" {
   description = "(Deprecated from version 1.2.0) The region used to launch this module resources."
+  type        = string
   default     = ""
 }
 
 variable "name" {
   description = "Name of the CEN instance"
+  type        = string
+  default     = ""
 }
 
 variable "description" {
   description = "The description of the CEN instance"
-  default     = "TF"
+  type        = string
+  default     = ""
 }
 
 variable "create_cen" {

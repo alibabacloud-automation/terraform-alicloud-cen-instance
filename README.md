@@ -17,18 +17,17 @@ You can use this in your terraform template with the following steps.
 
    ```
    module "cen_instance" {
-      source = "terraform-alicloud-modules/cen-instance/alicloud"
-   
-      name                     = "cen-instance-name"
+      source      = "terraform-alicloud-modules/cen-instance/alicloud"
+      name        = "cen-instance-name"
       description = "cen-example"
-      instances_attachment = [
-        {
+      instances_attachment = {
+         "cen" = {
           "vpc_id": "vpc-abc123",
           "vpc_name": "my-prod",
           "vpc_owner_id": "123456",
           "vpc_region_id": "cn-shanghai"
-        }
-      ]
+          }
+      }  
    }
    ```
 
@@ -69,7 +68,6 @@ From the version v1.2.0, the module has removed the following `provider` setting
 
 ```hcl
 provider "alicloud" {
-   version              = ">=1.80.0"
    region               = var.region != "" ? var.region : null
    configuration_source = "terraform-alicloud-modules/cen-instance"
 }
@@ -128,7 +126,7 @@ More details see [How to use provider in the module](https://www.terraform.io/do
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
 | <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.80.0 |
 
 Authors

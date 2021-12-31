@@ -5,5 +5,21 @@
 *.tfstate
 *.tfstate.*
 
-# .tfvars files
-*.tfvars
+# Module directory
+.terraform/
+
+# terraform log
+*.log
+
+# auto-generated key pair file
+*.pem
+
+# tools files
+.DS_Store
+.idea
+
+# others
+*.bak
+*.bk
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
