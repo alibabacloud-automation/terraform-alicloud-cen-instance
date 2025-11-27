@@ -11,25 +11,31 @@ These types of resources are supported:
 
 ## Usage
 
+<div style="display: block;margin-bottom: 40px;"><div class="oics-button" style="float: right;position: absolute;margin-bottom: 10px;">
+  <a href="https://api.aliyun.com/terraform?source=Module&activeTab=document&sourcePath=terraform-alicloud-modules%3A%3Acen-instance&spm=docs.m.terraform-alicloud-modules.cen-instance&intl_lang=EN_US" target="_blank">
+    <img alt="Open in AliCloud" src="https://img.alicdn.com/imgextra/i1/O1CN01hjjqXv1uYUlY56FyX_!!6000000006049-55-tps-254-36.svg" style="max-height: 44px; max-width: 100%;">
+  </a>
+</div></div>
+
 You can use this in your terraform template with the following steps.
 
 1. Adding a module resource to your template, e.g. main.tf
 
-   ```
-   module "cen_instance" {
-      source      = "terraform-alicloud-modules/cen-instance/alicloud"
-      name        = "cen-instance-name"
-      description = "cen-example"
-      instances_attachment = {
-         "cen" = {
-          "vpc_id": "vpc-abc123",
-          "vpc_name": "my-prod",
-          "vpc_owner_id": "123456",
-          "vpc_region_id": "cn-shanghai"
-          }
-      }  
-   }
-   ```
+```hcl
+module "cen_instance" {
+   source      = "terraform-alicloud-modules/cen-instance/alicloud"
+   name        = "cen-instance-name"
+   description = "cen-example"
+   instances_attachment = {
+      "cen" = {
+         "vpc_id": "vpc-abc123",
+         "vpc_name": "my-prod",
+         "vpc_owner_id": "123456",
+         "vpc_region_id": "cn-shanghai"
+         }
+   }  
+}
+```
 
 2. Setting `access_key` and `secret_key` values through environment variables:
 
