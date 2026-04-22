@@ -21,7 +21,7 @@ module "cen" {
       "vpc_id" : alicloud_vpc.default.id
       "vpc_name" : alicloud_vpc.default.name
       "vpc_owner_id" : data.alicloud_account.default.id
-      "vpc_region_id" : data.alicloud_vpcs.default.vpcs.0.region_id
+      "vpc_region_id" : data.alicloud_vpcs.default.vpcs[0].region_id
     }
   }
 

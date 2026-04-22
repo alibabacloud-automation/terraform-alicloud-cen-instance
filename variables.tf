@@ -1,8 +1,3 @@
-variable "region" {
-  description = "(Deprecated from version 1.2.0) The region used to launch this module resources."
-  type        = string
-  default     = ""
-}
 
 variable "name" {
   description = "Name of the CEN instance"
@@ -16,13 +11,7 @@ variable "description" {
   default     = ""
 }
 
-variable "create_cen" {
-  description = "Controls if CEN should be created"
-  type        = bool
-  default     = true
-}
-
-// Tags
+# Tags
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
